@@ -31,7 +31,19 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->add('/', 'home::index');
+$routes->add('/', function(){
+    return view('menu');
+});
+
+$routes->add('nouveau-frais', function(){
+    return view('ajouter');
+});
+
+$routes->add('login', function(){
+    return view('login');
+});
+
+$routes->post('check', 'App\Controllers\Logincontroller::index');
 
 /*
  * --------------------------------------------------------------------

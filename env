@@ -20,7 +20,7 @@
 # APP
 #--------------------------------------------------------------------
 
-app.baseURL = 'http://localhost/gsb'
+app.baseURL = 'http://gsb.test/gsb'
 # app.forceGlobalSecureRequests = false
 
 # app.sessionDriver = 'CodeIgniter\Session\Handlers\FileHandler'
