@@ -35,10 +35,6 @@ $routes->add('/', function(){
     return view('menu');
 });
 
-$routes->add('nouveau-frais', function(){
-    return view('ajouter');
-});
-
 $routes->add('login', function(){
     return view('login');
 });

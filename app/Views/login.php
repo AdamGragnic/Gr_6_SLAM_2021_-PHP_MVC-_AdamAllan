@@ -8,14 +8,12 @@
     </head>
 
     <body>
-
-        <!-- Formulaire de connexion-->
-
-        <form class="login" action="check" method="post">
-            <label for="label-form">GSB - connexion</label>
-            <input type="text" placeholder="Nom d'utilisateur" name="login" autofocus required>
-            <input type="password" placeholder="Mot de passe" name="password" required>
-            <button>Entrer</button>
-        </form>
+        <div class="main">
+            <form class="login" action="check" method="post">
+                <input type="text" placeholder="Nom d'utilisateur" name="login" autofocus required>
+                <input type="password" placeholder="Mot de passe" name="password" required>
+                <button type='submit' name="submit">Se connecter</button>
+            </form>
+        </div>
     </body>
 </html>
