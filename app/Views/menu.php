@@ -4,6 +4,12 @@
   <table id="fiche">
     <tbody>
       <tr>
+        <form action="/" method="post">
+          <th><input type="month" name="month"></th>
+          <td><button type="submit" name="select">Sélectionner</button></td>
+        </form>
+      </tr>
+      <tr>
         <th>Nom</th>
         <td>Test</td>
       </tr>
@@ -36,7 +42,7 @@
       </tbody>
 
       <tfoot>
-        <form action="" method="POST">
+        <form action="/" method="POST">
           <td>
             <select name='typefrais'>
               <optgroup label="Choisissez un type de frais">
@@ -48,7 +54,7 @@
             </select>
           </td>
           <td><input type="number" value="1" name="quantite"></td>
-          <td><button type='submit' name="submit" value="ff">Valider</button></td>
+          <td><button type='submit' name="ff">Valider</button></td>
         </form>
       </tfoot>
     </table>
@@ -65,11 +71,11 @@
         <tr><td>Essence</td><td>45 €</td><td>10/09/2021</td></tr>
       </tbody>
       <tfoot>
-        <form action="" method="POST">
+        <form action="/" method="POST">
           <td><input type="text" name="nom"></td>
           <td><input type="number" name="prix"></td>
           <td><input type="date" name="date"></td>
-          <td><button type='submit' name="submit" value="fhf">Valider</button></td>
+          <td><button type='submit' name="fhf">Valider</button></td>
         </form>
       </tfoot>
     </table>

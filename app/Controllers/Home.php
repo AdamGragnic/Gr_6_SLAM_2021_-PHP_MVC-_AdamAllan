@@ -17,13 +17,13 @@ class Home extends BaseController
                 $this->Logout();
             }
             elseif(isset($_POST['ff'])){
-
+                $this->MainPage();
             } 
             elseif (isset($_POST['fhf'])){
-
+                $this->MainPage();
             } 
             elseif (isset($_POST['select'])){
-
+                $this->MainPage();
             } 
             else {
                 $this->MainPage();
@@ -82,5 +82,20 @@ class Home extends BaseController
         else{
             return false;
         }
+    }
+
+    public function AddFraisForfait()
+    {
+        echo view('menu');
+    }
+
+    public function AddFraisHorsForfait()
+    {
+        echo view('menu');
+    }
+
+    public function SelectMonth()
+    {
+        echo view('menu');
     }
 }
