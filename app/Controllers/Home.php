@@ -11,47 +11,32 @@ class Home extends BaseController
     {
         session_start();
 
-        var_dump($_SESSION);
-
-        // Vérification si l'utilisateur es connecté
-        if ($this->IsLog()){
-            // Traitement des formulaires
-            if (isset($_POST['submit'])){
-                switch ($_POST['submit']){
-                    case 'ff':
-                        break;
-                    case 'fhf':
-                        break;
-                    case 'logout':
-                        $this->Logout();
-                        break;
-                }
+        if ($this->IsLog())
+        {
+            if (isset($_POST['logout'])) {
+                $this->Logout();
             }
+            elseif(isset($_POST['ff'])){
 
-            // Redirection sur les pages
-            if (isset($_GET['url']))
-            {
-                switch($_GET['url'])
-                {
-                    case 'home':
-                        $this->MainPage();
-                        break;
-                    case 'login':
-                        $this->LoginPage();
-                        break;
-                }
-            }
+            } 
+            elseif (isset($_POST['fhf'])){
+
+            } 
+            elseif (isset($_POST['select'])){
+
+            } 
             else {
                 $this->MainPage();
             }
-        }
-        else{
-            if (isset($_POST['login'])){
+            
+            
+        } else {
+            if (isset($_POST['submit'])) {
                 $this->CheckLogin();
-            }
-            else{
+            } else {
                 $this->LoginPage();
             }
+            
         }
     }
 
@@ -71,10 +56,7 @@ class Home extends BaseController
         
         $result = $visiteur->Attempt($_POST['login'],$_POST['password']);
 
-        echo "Login";
-        die;
-
-        if ($result != ""){
+        if (isset($result[0])){
             $_SESSION['uid'] = "516";
             $this->MainPage();
         }
@@ -92,7 +74,7 @@ class Home extends BaseController
         echo view('login');
     }
 
-    private function IsLog()
+    public function IsLog()
     {
         if (isset($_SESSION['uid'])){
             return true;
