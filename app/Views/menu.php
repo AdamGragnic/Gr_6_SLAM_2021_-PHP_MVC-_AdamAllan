@@ -36,7 +36,7 @@
       </tbody>
 
       <tfoot>
-        <form action="">
+        <form action="" method="POST">
           <td>
             <select name='typefrais'>
               <optgroup label="Choisissez un type de frais">
@@ -65,7 +65,7 @@
         <tr><td>Essence</td><td>45 €</td><td>10/09/2021</td></tr>
       </tbody>
       <tfoot>
-        <form action="">
+        <form action="" method="POST">
           <td><input type="text" name="nom"></td>
           <td><input type="number" name="prix"></td>
           <td><input type="date" name="date"></td>

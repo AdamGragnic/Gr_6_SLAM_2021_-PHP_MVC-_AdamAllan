@@ -9,10 +9,10 @@
 
     <body>
         <div class="main">
-            <form class="login" action="check" method="post">
+            <form class="login" action="" method="post">
                 <input type="text" placeholder="Nom d'utilisateur" name="login" autofocus required>
                 <input type="password" placeholder="Mot de passe" name="password" required>
-                <button type='submit' name="submit">Se connecter</button>
+                <button type='submit' name="submit" value="login">Se connecter</button>
             </form>
         </div>
     </body>

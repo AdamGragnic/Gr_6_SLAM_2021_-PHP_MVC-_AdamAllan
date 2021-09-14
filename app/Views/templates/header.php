@@ -15,7 +15,7 @@
                     <img src="gsb.png" alt="Logo GSB" width="100" height="50" style="padding:1%;">
                 </a>
 
-                <a href="" style="padding:1%;">
-                    Se déconnecter
-                </a>
+                <form action="/" method="POST">
+                    <button type='submit' name="logout" value="logout">Se déconnecter</button>
+                </form>
             </nav>
