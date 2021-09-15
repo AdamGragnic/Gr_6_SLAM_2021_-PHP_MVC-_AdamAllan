@@ -1,4 +1,8 @@
-<?php include 'templates/header.php'; ?>
+<?php 
+  include 'templates/header.php'; 
+  $nomFraisForfait = "";
+  $montantFraisForfait = "";
+?>
 
 <div class="content">
   <table id="fiche">
@@ -11,19 +15,19 @@
       </tr>
       <tr>
         <th>Nom</th>
-        <td>Test</td>
+        <td><?php echo $user->nom." ".$user->prenom?></td>
       </tr>
       <tr>
         <th>Mois</th>
-        <td>Test</td>
+        <td><?php echo $fraisActuel->mois ?></td>
       </tr>
       <tr>
         <th>Montant</th>
-        <td>Test</td>
+        <td><?php echo $fraisActuel->montantValide ?>€</td>
       </tr>
       <tr>
         <th>Date</th>
-        <td>Test</td>
+        <td><?php echo $fraisActuel->dateModif ?></td>
       </tr>
     </tbody>
   </table>
@@ -38,7 +42,31 @@
       </thead>
 
       <tbody>
-        <tr><td>Nuit d'hotêl</td><td>3</td><td>35 €</td></tr>
+        <?php foreach ($fraisForfait as $key => $value){ 
+          switch ($value->idFraisForfait){
+            case "ETP":
+              $nomFraisForfait = "Forfait Étape";
+              $montantFraisForfait = $value->quantite * 110;
+              break;
+            case "KM":
+              $nomFraisForfait = "Frais Kilométrique";
+              $montantFraisForfait = $value->quantite * 1;
+              break;
+            case "NUI":
+              $nomFraisForfait = "Nuitée Hôtel";
+              $montantFraisForfait = $value->quantite * 80;
+              break;
+            case "REP":
+              $nomFraisForfait = "Repas Restaurant";
+              $montantFraisForfait = $value->quantite * 25;
+              break;
+          }
+          ?>
+          <tr>
+            <td><?php echo $nomFraisForfait ?></td>
+            <td><?php echo $value->quantite ?></td>
+            <td><?php echo $montantFraisForfait ?> €</td></tr>
+        <?php } ?>
       </tbody>
 
       <tfoot>
@@ -68,7 +96,13 @@
       </thead>
 
       <tbody>
-        <tr><td>Essence</td><td>45 €</td><td>10/09/2021</td></tr>
+        <?php foreach ($fraisHorsForfait as $key => $value){ ?>
+          <tr>
+            <td><?php echo $value->libelle ?></td>
+            <td><?php echo $value->montant ?></td>
+            <td><?php echo $value->date ?></td>
+          </tr>
+        <?php } ?>
       </tbody>
       <tfoot>
         <form action="/" method="POST">
@@ -81,5 +115,4 @@
     </table>
   </div>
 </div>
-
 <?php include 'templates/footer.php'; ?>

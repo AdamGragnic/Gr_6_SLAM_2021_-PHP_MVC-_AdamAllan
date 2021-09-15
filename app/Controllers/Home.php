@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Frais;
 use App\Models\Visiteur;
+use CodeIgniter\I18n\Time;
 
 class Home extends BaseController
 {
@@ -17,13 +18,13 @@ class Home extends BaseController
                 $this->Logout();
             }
             elseif(isset($_POST['ff'])){
-                $this->MainPage();
+                $this->AddFraisForfait();
             } 
             elseif (isset($_POST['fhf'])){
-                $this->MainPage();
+                $this->AddFraisHorsForfait();
             } 
             elseif (isset($_POST['select'])){
-                $this->MainPage();
+                $this->SelectMonth();
             } 
             else {
                 $this->MainPage();
@@ -45,9 +46,26 @@ class Home extends BaseController
         echo view('login');
     }
 
-    public function MainPage()
+    public function MainPage($mois = null)
     {
-        echo view('menu');
+        $frais = new Frais();
+        $visiteur = new Visiteur();
+
+        if (!isset($mois)){
+            $mois = $this->GetMois(date('m'));
+        }
+
+        $fraisActuel = $frais->GetFrais($mois);
+        $user = $visiteur->GetUserData($_SESSION['uid']);
+        $fraisForfait = $frais->GetLigneFraisForfait($_SESSION['uid'], $mois);
+        $fraisHorsForfait = $frais->GetLigneFraisHorsForfait($_SESSION['uid'], $mois);
+
+        echo view('menu', [
+            'fraisActuel' => $fraisActuel,
+            'user' => $user,
+            'fraisForfait' => $fraisForfait,
+            'fraisHorsForfait' => $fraisHorsForfait
+        ]);
     }
 
     public function CheckLogin()
@@ -57,7 +75,7 @@ class Home extends BaseController
         $result = $visiteur->Attempt($_POST['login'],$_POST['password']);
 
         if (isset($result[0])){
-            $_SESSION['uid'] = "516";
+            $_SESSION['uid'] = $result[0]->id;
             $this->MainPage();
         }
         else{
@@ -100,6 +118,23 @@ class Home extends BaseController
 
     public function SelectMonth()
     {
-        $this->MainPage();
+        if(isset($_POST['month'])){
+            $mois = $_POST['month'];
+
+            $mois = $this->GetMois(substr($mois, 5,2));
+
+            $this->MainPage($mois);
+        }
+        else{
+            $this->MainPage();
+        }
+    }
+
+    const LISTEMOIS = [ 1 => 'Janvier', 2 => 'Février', 3 => 'Mars', 4 => 'Avril', 5 =>'Mai', 6 => 'Juin',
+                        7 => 'Juillet', 8 => 'Août', 9 => 'Septembre', 10 => 'Octobre', 11 =>'Novembre', 12 => 'Décembre'];
+
+    private function GetMois($id)
+    {
+        return $this::LISTEMOIS[(int) $id];
     }
 }

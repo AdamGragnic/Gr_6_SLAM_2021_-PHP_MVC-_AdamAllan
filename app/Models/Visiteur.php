@@ -9,8 +9,18 @@ class Visiteur extends Model{
     {
         $db = db_connect();
 
-        $querry = $db->query("SELECT * FROM visiteur WHERE login = ? AND mdp = ?",[$login,$password]);
+        $querry = $db->query("SELECT `id` FROM visiteur WHERE login = ? AND mdp = ?",[$login,$password]);
 
         return $querry->getResult();
+    }
+
+    public function GetUserData($uid)
+    {
+        
+        $db = db_connect();
+
+        $querry = $db->query("SELECT `nom`,`prenom` FROM visiteur WHERE id = ?",[$uid]);
+
+        return $querry->getResult()[0];
     }
 }
