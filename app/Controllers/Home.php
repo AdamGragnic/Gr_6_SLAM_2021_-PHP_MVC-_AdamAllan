@@ -86,16 +86,20 @@ class Home extends BaseController
 
     public function AddFraisForfait()
     {
-        echo view('menu');
+        // Ajout du frais si non présent pour ce frais et ce mois. Addition des frais si déjà présent
+        // pa de - stp
+        $this->MainPage();
     }
 
     public function AddFraisHorsForfait()
     {
-        echo view('menu');
+        // Insert en fonction du mois
+
+        $this->MainPage();
     }
 
     public function SelectMonth()
     {
-        echo view('menu');
+        $this->MainPage();
     }
 }
