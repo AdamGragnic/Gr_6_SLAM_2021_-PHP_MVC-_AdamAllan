@@ -55,10 +55,10 @@ class Home extends BaseController
             $mois = $this->GetMois(date('m'));
         }
 
-        $fraisActuel = $frais->GetFrais($mois);
+        $fraisActuel = $frais->GetFrais($_SESSION['uid'],$mois);
         $user = $visiteur->GetUserData($_SESSION['uid']);
-        $fraisForfait = $frais->GetLigneFraisForfait($_SESSION['uid'], $mois);
-        $fraisHorsForfait = $frais->GetLigneFraisHorsForfait($_SESSION['uid'], $mois);
+        $fraisForfait = $frais->GetLignesFraisForfait($_SESSION['uid'], $mois);
+        $fraisHorsForfait = $frais->GetLignesFraisHorsForfait($_SESSION['uid'], $mois);
 
         echo view('menu', [
             'fraisActuel' => $fraisActuel,
