@@ -11,7 +11,7 @@ class Visiteur extends Model{
 
         $querry = $db->query("SELECT `id` FROM visiteur WHERE login = ? AND mdp = ?",[$login,$password]);
 
-        return $querry->getResult();
+        return $querry->getResult()[0];
     }
 
     public function GetUserData($uid)

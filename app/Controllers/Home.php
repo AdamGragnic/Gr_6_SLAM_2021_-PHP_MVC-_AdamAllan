@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Models\Frais;
 use App\Models\Visiteur;
-use CodeIgniter\I18n\Time;
 
 class Home extends BaseController
 {
@@ -74,8 +73,8 @@ class Home extends BaseController
         
         $result = $visiteur->Attempt($_POST['login'],$_POST['password']);
 
-        if (isset($result[0])){
-            $_SESSION['uid'] = $result[0]->id;
+        if (isset($result)){
+            $_SESSION['uid'] = $result->id;
             $this->MainPage();
         }
         else{
@@ -104,14 +103,22 @@ class Home extends BaseController
 
     public function AddFraisForfait()
     {
-        // Ajout du frais si non présent pour ce frais et ce mois. Addition des frais si déjà présent
-        // pa de - stp
+        $frais = new Frais();
+
+        $mois = $this->GetMois(date('m'));
+
+        $frais->AddLigneFraisForfait($_SESSION['uid'],$mois,$_POST['typefrais'],$_POST['quantite']);
+
         $this->MainPage();
     }
 
     public function AddFraisHorsForfait()
     {
-        // Insert en fonction du mois
+        $frais = new Frais();
+
+        $mois = $this->GetMois(date('m'));
+
+        $frais->AddLigneFraisHorsForfait($_SESSION['uid'],$mois,$_POST['nom'],$_POST['prix'],$_POST['date']);
 
         $this->MainPage();
     }
