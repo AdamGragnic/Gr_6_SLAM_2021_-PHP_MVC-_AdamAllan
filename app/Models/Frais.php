@@ -6,10 +6,10 @@ use CodeIgniter\Model;
 
 class Frais extends Model{
     
-//Recupere le contenu de la table fichefrais pour le visiteur connecté
+//Recupere le contenu de la table fichefrais pour le visiteur connectï¿½
 public function GetFrais($uid, $mois)
     {
-        //Connecte a la base de donnée
+        //Connecte a la base de donnï¿½e
         $db = db_connect();
 
         //Cette requete SQL recupere tout le contenu de la table fichefrais de ce mois-ci pour ce visiteur
@@ -25,7 +25,7 @@ public function GetFrais($uid, $mois)
     //Recupere le contenu de la table lignefraisforfait pour le visiteur
     public function GetLignesFraisForfait($uid, $mois)
     {
-        //Connecte a la base de donnée
+        //Connecte a la base de donnï¿½e
         $db = db_connect();
 
         //Cette requete SQL recupere tout le contenu de la table lignefraisforfait de ce mois-ci pour ce visiteur
@@ -41,7 +41,7 @@ public function GetFrais($uid, $mois)
     //Recupere le contenu de la ligne lignefraisforfait pour le frais choisis pour le visiteur
     public function GetLigneFraisForfait($uid, $mois, $id)
     {
-        //Connecte a la base de donnée
+        //Connecte a la base de donnï¿½e
         $db = db_connect();
 
         //Cette requete SQL recupere tout le contenu de la table lignefraishorsforfait de ce mois-ci pour ce visiteur
@@ -57,7 +57,7 @@ public function GetFrais($uid, $mois)
     //Recupere le contenu de la tabke lignefraishorsforfait pour le visiteur
     public function GetLignesFraisHorsForfait($uid, $mois)
     {
-        //Connecte a la base de donnée
+        //Connecte a la base de donnï¿½e
         $db = db_connect();
 
         //Cette requete SQL recupere tout le contenu de la table lignefraishorsforfait de ce mois-ci pour ce visiteur
@@ -69,16 +69,16 @@ public function GetFrais($uid, $mois)
         return $query->getResult();
     }
     
-    //Crée une ficheFrais
+    //CrÃ©e une ficheFrais
     public function CreateFicheFrais($uid, $mois)
     {
-        //Connecte a la base de donnée
+        //Connecte a la base de donnï¿½e
         $db = db_connect();
 
         //Determine le format de la date
         $date = date('Y-m-d');
 
-        //Insert dans la table fichefrais les données suivantes
+        //Insert dans la table fichefrais les donnï¿½es suivantes
         $sql = "INSERT INTO `fichefrais` (`idVisiteur`, `mois`, `nbJustificatifs`, `montantValide`, `dateModif`, `idEtat`) VALUES (?, ?, '0', '0', ?, 'CR')";
 
         //Execute la requete SQL
@@ -88,7 +88,7 @@ public function GetFrais($uid, $mois)
     //Recupere le montant des frais
     public function GetMontantFrais($idFrais)
     {
-        //Connecte a la base de donnée
+        //Connecte a la base de donnï¿½e
         $db = db_connect();
 
         //Retourne le montant des frais via une query qui recupere tout le contenu d'un frais selon son id
@@ -98,7 +98,7 @@ public function GetFrais($uid, $mois)
     //Ajoute les frais a lignefraisforfait si les frais de ce mois-ci existent deja, sinon, cree la ligne et y insert les frais
     public function AddLigneFraisForfait($uid, $mois,$idFrais,$quantite)
     {
-        //Connecte a la base de donnée
+        //Connecte a la base de donnï¿½e
         $db = db_connect();
 
         //Si il y n'y a pas de ficheFrais pour ce mois-ci
@@ -116,7 +116,7 @@ public function GetFrais($uid, $mois)
             //Execute la requete SQL
             $db->query($sql,[$quantite + $frais->quantite,$uid,$mois,$idFrais]);
         }
-        //Sinon, Insert dans lignefraisforfait les donées suivantes
+        //Sinon, Insert dans lignefraisforfait les donï¿½es suivantes
         else{
             $sql = "INSERT INTO `lignefraisforfait` (`idVisiteur`, `mois`, `idFraisForfait`, `quantite`) VALUES (?, ?, ?, ?)";
             //Execute la requete SQL
@@ -128,7 +128,7 @@ public function GetFrais($uid, $mois)
     //Ajoute les frais a lignefraishorsforfait si les frais existent deja, sinon, cree la ligne et y insert les frais
     public function AddLigneFraisHorsForfait($uid, $mois,$libelle,$montant,$date)
     {
-        //Connecte a la base de donnée
+        //Connecte a la base de donnï¿½e
         $db = db_connect();
 
         //Si il n'y a pas de ficheFrais pour ce mois-ci
@@ -138,7 +138,7 @@ public function GetFrais($uid, $mois)
             $this->CreateFicheFrais($uid,$mois);
         }
 
-        //Insert dans la table fraishorsfait les données suivantes
+        //Insert dans la table fraishorsfait les donnï¿½es suivantes
         $sql = "INSERT INTO `lignefraishorsforfait` (`id`, `idVisiteur`, `mois`, `libelle`, `date`, `montant`) VALUES (NULL, ?, ?, ?, ?, ?)";
 
         //Execute la requete SQL
@@ -149,7 +149,7 @@ public function GetFrais($uid, $mois)
     //Mets a jour la table ficheFrais
     public function UpdateFicheFrais($uid, $mois, $montant)
     {
-        //Connecte a la base de donnée
+        //Connecte a la base de donnï¿½e
         $db = db_connect();
         //update la table Fichefrais
         $sql = "UPDATE `fichefrais` SET `montantValide` = ? WHERE `fichefrais`.`idVisiteur` = ? AND `fichefrais`.`mois` = ?";
@@ -161,13 +161,13 @@ public function GetFrais($uid, $mois)
     //Mets a jour la table lignefraisforfait
     public function UpdateFraisForfait($uid, $mois, $id, $quantite)
     {
-        //Connecte a la base de donnée
+        //Connecte a la base de donnï¿½e
         $db = db_connect();
 
         
         $frais = $this->GetLigneFraisForfait($uid,$mois, $id);
 
-        //Update la table lignefraisforfait en y ajoutant les données suivantes
+        //Update la table lignefraisforfait en y ajoutant les donnï¿½es suivantes
         $sql = "UPDATE `lignefraisforfait` SET `quantite` = ? WHERE `lignefraisforfait`.`idVisiteur` = ? AND `lignefraisforfait`.`mois` = ? AND `lignefraisforfait`.`idFraisForfait` = ?";
 
         //Execute la requete SQL
@@ -178,7 +178,7 @@ public function GetFrais($uid, $mois)
     //recalcule le montant des frais en additionant le montant saisis avec celui deja present en base
     public function RecalculateMontant($uid, $mois)
     {
-        //Connecte a la base de donnée
+        //Connecte a la base de donnï¿½e
         $db = db_connect();
 
         //Initialise le montant a 0
